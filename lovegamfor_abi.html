@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You 💌</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Segoe Script', cursive;
+      background: #ffe6ea;
+      overflow: hidden;
+    }
+    #glitter {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px) 0 0/10px 10px;
+      animation: shimmer 5s linear infinite;
+    }
+    @keyframes shimmer { to { transform: translate(100%,100%); } }
+    .screen {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100%;
+      text-align: center;
+      padding: 20px;
+    }
+    .screen.active {
+      display: flex;
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    button {
+      margin-top: 20px;
+      font-size: 1.2em;
+      background: #ff99aa;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    input[type=text] {
+      font-size: 1em;
+      padding: 8px;
+      margin-top: 10px;
+      width: 80%;
+      border-radius: 6px;
+      border: 1px solid #d48;
+    }
+    .quiz-box {
+      background: #ffd1dc;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 400px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .result {
+      font-size: 1.4em;
+      margin-top: 20px;
+      color: #6b0037;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div id="glitter"></div>
+
+  <!-- Intro Screen -->
+  <div class="screen active" id="intro">
+    <h1>Happy Anniversary, Love! 🥰</h1>
+    <p>Click to begin our little game...</p>
+    <button onclick="goNext('bouquet')">Start</button>
+  </div>
+
+  <!-- Bouquet Reveal -->
+  <div class="screen" id="bouquet">
+    <img src="https://i.imgur.com/64Z1Vby.png" alt="Bouquet" style="max-width:300px">
+    <p style="font-size:1.6em; margin-top:20px;">For the most beautiful flower in my life 💐</p>
+    <button onclick="goNext('quiz1')">Play a little quiz</button>
+  </div>
+
+  <!-- Quiz Screens -->
+  <div class="screen" id="quiz1">
+    <div class="quiz-box">
+      <h2>1. Why did we meet?</h2>
+      <label><input type="radio" name="q1" value="student council partylist"> Student council partylist</label>
+      <label><input type="radio" name="q1" value="class project"> Class project</label>
+      <label><input type="radio" name="q1" value="random seatmate"> Random seatmate</label>
+      <button onclick="checkAnswer('q1','student council partylist','quiz2')">Next</button>
+    </div>
+  </div>
+
+  <div class="screen" id="quiz2">
+    <div class="quiz-box">
+      <h2>2. Where did our first date happen? What made it memorable for you :)</h2>
+      <label><input type="radio" name="q2" value="coffee code"> Coffee Code</label>
+      <label><input type="radio" name="q2" value="milk tea place"> Milk Tea Place</label>
+      <label><input type="radio" name="q2" value="plaza"> Plaza</label><br>
+      <input type="text" id="q2text" placeholder="What made it memorable?">
+      <button onclick="checkAnswer('q2','coffee code','quiz3')">Next</button>
+    </div>
+  </div>
+
+  <div class="screen" id="quiz3">
+    <div class="quiz-box">
+      <h2>3. What do you like most about me?</h2>
+      <input type="text" id="q3text" placeholder="Type your answer">
+      <button onclick="goNext('quiz4')">Next</button>
+    </div>
+  </div>
+
+  <div class="screen" id="quiz4">
+    <div class="quiz-box">
+      <h2>4. When is our anniversary?</h2>
+      <label><input type="radio" name="q4" value="August 12, 2023"> August 12, 2023</label>
+      <label><input type="radio" name="q4" value="August 14, 2023"> August 14, 2023</label>
+      <label><input type="radio" name="q4" value="July 12, 2023"> July 12, 2023</label>
+      <button onclick="checkAnswer('q4','August 12, 2023','quiz5')">Next</button>
+    </div>
+  </div>
+
+  <div class="screen" id="quiz5">
+    <div class="quiz-box">
+      <h2>5. Who confessed first?</h2>
+      <label><input type="radio" name="q5" value="Abi dumao"> Abi Dumao</label>
+      <label><input type="radio" name="q5" value="Fria"> Fria</label>
+      <label><input type="radio" name="q5" value="We both did"> We both did</label>
+      <button onclick="checkAnswer('q5','Abi dumao','result')">See Result</button>
+    </div>
+  </div>
+
+  <!-- Result Screen -->
+  <div class="screen" id="result">
+    <h2>You finished the quiz! 🎉</h2>
+    <p class="result" id="scoreDisplay">Calculating score...</p>
+    <p class="result">You may claim your prize once we meet again! 💞</p>
+    <button onclick="goNext('mazeGame')">Go to Final Maze 🎮</button>
+  </div>
+
+  <!-- Maze Game -->
+  <div class="screen" id="mazeGame">
+    <canvas id="mazeCanvas" width="500" height="500" style="border:4px solid #fff; background:#0d0221; border-radius:15px;"></canvas>
+    <p style="color:black; margin-top:20px;">Use arrow keys to move! Reach the house 🏠</p>
+  </div>
+
+  <!-- Final Message -->
+  <div class="screen" id="finalMessage">
+    <h2 style="color:#d164b6;">You made it home! 🏡</h2>
+    <p style="color:black; max-width:600px;">
+      Happy anniversary!!! Thank you for being the best, baby! For being you. Words aren't enough to let you know how happy u make my heart po palagi, that's why I made u this simple game hehe. I know that being far away from each other is very hard bebi, especially sayo po na gusto always magkasama. But we will get through it together. I will always be here for you mahal, no matter how hard it gets. I know that our relationship isn't perfect, but it's normal to have bad days. What matters is that we go through those bad days together. Not alone po. I appreciate everything you do for me and I really want to thank u for all ur effort, patience, and trust na ginive mo sakin the whole 2 years baby. It wasn't easy but we found reasons to fight for each other. I hope that it will always stay that way mahal! To more years with youuu!!!! I will always be here to support u through everything. I will always be your #1 fan!!! I LOVE YOU SO MUCHHH 💖
+    </p>
+    <p style="color:#ffe6ea; font-size:1.2em;">Thank you for being the best, lovelove. f 🌙</p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let score = 0;
+
+      window.goNext = function(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        if (id === "mazeGame") startMaze();
+      }
+
+      window.checkAnswer = function(q, correct, nextId) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value.toLowerCase() === correct.toLowerCase()) score++;
+        goNext(nextId);
+        if (nextId === 'result') {
+          document.getElementById('scoreDisplay').innerText = `You got ${score}/3 correct 💖`;
+        }
+      }
+
+      // Maze Game
+      let canvas, ctx;
+      const tileSize = 50;
+      let player = { x: 0, y: 0 };
+      const goal = { x: 400, y: 400 };
+
+      const walls = [
+        [50,0],[100,0],[150,0],[200,0],
+        [200,50],[200,100],
+        [250,100],[300,100],
+        [350,100],[350,150],[350,200],[300,200],
+        [250,200],[200,200],
+        [150,200],[150,250],[150,300],
+        [200,300],[250,300],[300,300],[350,300],[400,300],
+        [400,250],[400,200],[400,150],
+        [100,250],[50,250],[50,300],[50,350],[100,350],[150,350],[200,350],
+      ];
+
+      function drawMaze() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for(let i=0; i<100; i++) {
+          ctx.fillStyle = 'white';
+          ctx.fillRect(Math.random()*500, Math.random()*500, 1.5, 1.5);
+        }
+        ctx.beginPath();
+        ctx.arc(430, 70, 30, 0, Math.PI * 2);
+        ctx.fillStyle = "#fef3b9";
+        ctx.fill();
+        ctx.fillStyle = "#2c003e";
+        for (let wall of walls) {
+          ctx.fillRect(wall[0], wall[1], tileSize, tileSize);
+        }
+        ctx.fillStyle = "#ffcccb";
+        ctx.fillRect(goal.x + 10, goal.y + 20, 30, 30);
+        ctx.beginPath();
+        ctx.moveTo(goal.x + 5, goal.y + 20);
+        ctx.lineTo(goal.x + 25, goal.y);
+        ctx.lineTo(goal.x + 45, goal.y + 20);
+        ctx.fillStyle = "#cc6666";
+        ctx.fill();
+        ctx.fillStyle = "#fddde6";
+        ctx.beginPath();
+        ctx.arc(player.x + tileSize/2, player.y + tileSize/2, tileSize/2.5, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      function isWall(x, y) {
+        return walls.some(w => w[0] === x && w[1] === y);
+      }
+
+      function movePlayer(dx, dy) {
+        const newX = player.x + dx * tileSize;
+        const newY = player.y + dy * tileSize;
+        if (newX < 0 || newY < 0 || newX >= 500 || newY >= 500) return;
+        if (isWall(newX, newY)) return;
+        player.x = newX;
+        player.y = newY;
+        drawMaze();
+        if (player.x === goal.x && player.y === goal.y) {
+          setTimeout(() => {
+            goNext('finalMessage');
+          }, 500);
+        }
+      }
+
+      function startMaze() {
+        canvas = document.getElementById("mazeCanvas");
+        ctx = canvas.getContext("2d");
+        player = { x: 0, y: 0 };
+        drawMaze();
+        window.addEventListener("keydown", function(e){
+          switch(e.key){
+            case "ArrowUp": movePlayer(0, -1); break;
+            case "ArrowDown": movePlayer(0, 1); break;
+            case "ArrowLeft": movePlayer(-1, 0); break;
+            case "ArrowRight": movePlayer(1, 0); break;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

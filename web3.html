@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy 2nd Anniversary — F &amp; A</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* 🎨 Styling (unchanged) — same as before */
+    :root {
+      --bg: #fff6fa;
+      --panel: #ffeef6;
+      --card: #fff0f7;
+      --accent: #ff7fb6;
+      --muted: #69484c;
+      --glass: rgba(255,255,255,0.6);
+      --radius: 18px;
+      --ease: cubic-bezier(.2,.9,.2,1);
+      --maxWidth: 980px;
+      --shadow-strong: 0 22px 45px rgba(120,70,90,0.12);
+      --shadow-soft: 0 10px 24px rgba(120,70,90,0.08);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg,var(--bg), #ffeaf4);
+      color: #3b2430;
+    }
+    .container { max-width: var(--maxWidth); margin: 28px auto; padding: 18px; }
+    .site {
+      background: linear-gradient(180deg, #fff, var(--panel));
+      border-radius: 22px;
+      box-shadow: var(--shadow-strong);
+      padding-bottom: 36px;
+    }
+    .hero {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      padding: 28px;
+      justify-content: center;
+      text-align: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      width: 86px;
+      height: 86px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #ffd9ec, #ffdff4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 26px;
+      color: #6c304d;
+    }
+    .hero h1 { margin: 0; font-family: "Playfair Display", serif; font-size: 24px; }
+    .hero p.sub { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+    .main {
+      display: flex;
+      gap: 28px;
+      padding: 20px 28px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .left { flex: 1 1 620px; min-width: 320px; }
+    .right { width: 320px; min-width: 240px; }
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+    .carousel { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 12px; }
+    .carousel-item {
+      flex: 0 0 72%;
+      max-width: 72%;
+      height: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg,#ffdff4,#ffe8f8);
+      scroll-snap-align: center;
+    }
+    .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
+    .thumbs { display: flex; gap: 10px; margin-top: 12px; }
+    .thumb { width: calc((100% - 20px)/3); height: 86px; border-radius: 10px; overflow: hidden; cursor: pointer; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .tabs { display: flex; gap: 12px; justify-content: center; margin: 18px 0; flex-wrap: wrap; }
+    .tab-btn {
+      background: linear-gradient(180deg,#ffd9ec,#ffcfe0);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      color: #5a2d3a;
+    }
+    .tab-btn.active { box-shadow: inset 0 -4px 0 rgba(255,120,180,0.08); }
+    .subtab-wrap { display: none; margin-top: 12px; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .subtab-btn {
+      background: #fff3f8;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,120,180,0.08);
+      cursor: pointer;
+      font-weight: 600;
+      color: #5a2d3a;
+    }
+    .letter-panel {
+      max-width: 720px;
+      margin: 12px auto 0;
+      border-radius: 12px;
+      background: linear-gradient(180deg,#fff,#fff7fb);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,120,180,0.12);
+      overflow: hidden;
+    }
+    .letter-inner {
+      padding: 18px;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-6px) scaleY(.98);
+      transition: all 0.4s var(--ease);
+    }
+    .letter-inner.open {
+      max-height: 800px;
+      opacity: 1;
+      transform: translateY(0) scaleY(1);
+    }
+    .music { text-align: center; margin-top: 28px; }
+    .music img { border-radius: 12px; box-shadow: 0 12px 28px rgba(120,70,90,0.06); }
+    .music p { color: var(--muted); margin-top: 10px; }
+    .from-fria { text-align: center; padding: 28px 18px 40px; }
+    .from-fria img { width: 320px; max-width: 82%; border-radius: 12px; margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="site">
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="logo">F &amp; A</div>
+        <div>
+          <h1>Happy 2nd Anniversary love! I miss you big time</h1>
+          <p class="sub">Every day with you is a little brighter — this is a tiny place where I kept some of my favorite things about us.</p>
+        </div>
+      </div>
+
+      <!-- MAIN -->
+      <div class="main">
+        <div class="left">
+          <div class="card">
+            <!-- Carousel -->
+            <div style="text-align:center; margin-bottom:8px; font-weight:700;">Our Moments</div>
+            <div class="carousel">
+              <div class="carousel-item"><img src="Assets/1.jpeg" alt=""></div>
+              <div class="carousel-item"><img src="Assets/2.jpeg" alt=""></div>
+              <div class="carousel-item"><img src="Assets/5.jpeg" alt=""></div>
+            </div>
+            <div class="thumbs">
+              <div class="thumb" data-index="0"><img src="Assets/8.jpeg" alt=""></div>
+              <div class="thumb" data-index="1"><img src="Assets/7.jpeg" alt=""></div>
+              <div class="thumb" data-index="2"><img src="Assets/8.jpeg" alt=""></div>
+            </div>
+
+            <!-- Tabs & Subtabs -->
+            <div class="tabs">
+              <button class="tab-btn" data-tab="happy">Happy </button>
+              <button class="tab-btn" data-tab="love">You</button>
+              <button class="tab-btn" data-tab="you">Love</button>
+            </div>
+
+            <div class="subtab-wrap" id="sub-happy">
+              <button class="subtab-btn" data-letter="happy1">Click here</button>
+              <button class="subtab-btn" data-letter="happy2">Click here</button>
+              <button class="subtab-btn" data-letter="happy3">Click here</button>
+            </div>
+
+            <div class="subtab-wrap" id="sub-love">
+              <button class="subtab-btn" data-letter="love1">Click here</button>
+              <button class="subtab-btn" data-letter="love2">Click here</button>
+              <button class="subtab-btn" data-letter="love3">Click here</button>
+            </div>
+
+            <div class="subtab-wrap" id="sub-you">
+              <button class="subtab-btn" data-letter="you1">Click here</button>
+              <button class="subtab-btn" data-letter="you2">Click here</button>
+              <button class="subtab-btn" data-letter="you3">Click here</button>
+            </div>
+
+            <!-- Love Letter Panels -->
+            <div class="letter-panel">
+              <div class="letter-inner" id="happy1">I know i've said this multiple times na, pero i really want to thank you for making my life so much brighter ever since u came.U make it better just by being in it. I know you think of yourself as someone na hindi enough, pero u're more than enough for me baby.</div>
+              <div class="letter-inner" id="happy2">You are such a sweet and kind soul, someone whose presence has quietly but powerfully changed the way I see the world. You've made me fall in love again with so many things I once thought were ordinary or dull. You breathed life back into the parts of me I had forgotten, and in doing so, you helped me rediscover the quiet beauty in simply existing. One of the most precious things you've helped me relove is life itself, babi. Something that once felt heavy, overwhelming, or even tiring now holds light again, simply because you're in it.
+
+Thank you for being my safe space, my pahinga, especially in moments when everything feels too loud or too much. When the world becomes a storm, your presence is my calm. You don’t even have to say anything; just knowing you're there is enough to help me breathe a little easier. It's a kind of peace I never knew I needed until I found it in you.</div>
+              <div class="letter-inner" id="happy3">Just a little reminder in case the day feels heavy or ordinary: you are someone truly rare in this world. Your laugh, your kindness, the way you care so deeply even in small things—it all brings so much light to the people around you, especially me. I know life isn’t always soft, but having you in it makes even the hard days feel worth showing up for.
+
+You don’t always see how amazing you are, but I do. I see it in the way you love, the way you try, the way you continue showing up with your heart open. You are magic in human form. And I'm so lucky I get to walk through life with you—on the good days, the bad ones, and all the ordinary moments in between.
+
+You are more than enough. You are deeply loved. And I hope today wraps around you like a hug that says, “You matter. You're doing just fine. And you’re never alone.”
+
+Always here. Always proud of you.</div>
+
+              <div class="letter-inner" id="love1">You’re honestly one of the most amazing people I’ve ever known. You’re so close to God, and it shows in the way you live, speak, and treat people. Being around you reminds me to slow down and trust more, to have faith even when things get hard. You don’t push it pero you just live it, and that’s what makes it so powerful.
+
+At the same time, you’re also one of the funniest people I know. You make me laugh in the most unexpected moments, and I love that about you. You’re light, you’re real, and you never try too hard. You just are, and that’s more than enough.
+
+I also admire how close you are to your parents. The way you respect them and love them so deeply makes my heart full. It says so much about the kind of person you are—caring, grounded, and full of love.
+
+Honestly, you influence me more than you probably realize. Because of you, I’ve started seeing the good more often. I’ve started trying to be better, to be kinder, to choose what’s right. You help me grow in such a gentle way, just by being yourself.
+
+You really are something special. Just thought you should know.</div>
+              <div class="letter-inner" id="love2">I fell in love with you the moment I really saw you. Your brown eyes caught me right away. There’s something about them bebe like warm, calm, and full of depth. Like they hold so much more than what you say out loud. They made me want to stay, to learn everything about you.
+
+And your smile that shows up when you're trying not to laugh too hard. It's honestly one of the best things I've ever seen. I still catch myself staring when you smile, like I’m seeing it for the first time.
+
+Your hair too. Long and soft, the way it moves when you turn your head or run your fingers through it. Sometimes you say it’s messy, but it always looks perfect to me. It just fits you.
+
+And your laugh—especially that funny, cautious one you do when something catches you off guard or when you're trying to hide it. That laugh makes me want to hear it over and over. It’s the kind of sound that sticks with me, even after we’re apart.
+
+You’re beautiful in a way that’s so natural and real. You didn’t have to do anything extra. I saw you, and I fell..</div>
+              <div class="letter-inner" id="love3">I’m so proud of you, bebi. Seeing how hard you work and how much you’ve achieved as an academic achiever just blows me away. You always push yourself to be the best, and it shows. But I also want you to remember to take some rest, oki po? You deserve to slow down and breathe sometimes.
+
+You inspire me every day to be better po not just in school or work, but in life too. Because of you, I want to keep growing and improving. You don’t even realize how much of a positive impact you have on me.
+
+So please, don’t forget to take care of yourself as much as you take care of everything else. I’m here cheering for you always, and I’m proud of everything you’ve done and everything you will do.</div>
+
+              <div class="letter-inner" id="you1">Happy anniversary, bebii! I can’t believe how far we’ve come and all the memories we’ve made together. Every day with you feels like a gift. You bring so much joy and light into my life, and I’m so thankful to have you by my side.
+
+Through the good times and the tough moments, we’ve stood strong together. You’ve shown me what true love and partnership really mean. I love how we laugh until our stomachs hurt, support each other no matter what, and keep growing as individuals and as a team.
+
+You’ve become such an important part of my life—my best friend, my comfort, and my biggest motivation. I’m proud of everything you are and everything we are building together.</div>
+              <div class="letter-inner" id="you2"> i know  po that we’re just starting this long-distance thing and it can feel a little scary or uncertain at times. But I want you to know how much I believe in us. Even though we’re apart right now, it doesn’t change how much I care about you or how much I want us to work.
+
+Distance can be tough, and it’s normal to feel nervous about what’s ahead. But I feel lucky to have you in my life, and I’m ready to keep growing with you no matter where we are. What matters most is that we keep trusting each other and keep being honest about how we feel. That’s what will keep us strong.
+
+I think this is just the beginning of something really special. Every day I learn more about you, and it makes me even more sure that what we have is worth it. Even though we’re not close right now, I carry you with me all the time—in my thoughts, in my heart.
+
+I’m proud of us for starting this journey together. I know it won’t always be easy, but I also know we can handle whatever comes our way as long as we have each other. I love you, and I’m excited for everything we have ahead of us. </div>
+              <div class="letter-inner" id="you3">Happy anniversary po, love! Grabe, ang saya ko na makarating tayo sa araw na to, kasama ka sa buhay ko. Lahat ng moments na pinagsamahan natin, mula sa tawanan hanggang sa mga challenges, ang laki ng naitulong satin para mas maging masaya at mas mabuting tao.
+
+Alam mo bebe, sobrang importamt ka sa akin. Yung kindness mo, tapang mo, at yung pagiging andyan mo palagi para sa akin—hindi ko po makakalimutan. Hindi lang tayo nag-grow bilang mag-partner, kundi bilang mga tao rin, at yun ang pinaka-importanteng bagay sa akin.
+
+Hindi po perfect palagi ang lahat, pero dahil sa’yo, ramdam ko na worth it lahat ng pinagdadaanan natin. Excited na me sa future natin, sa mga bagong memories na gagawin natin. Basta tandaan mo po, andito lang ako, committed at ready na harapin ang lahat kasama ka.
+
+Maraming salamat po sa pasensya, sa pang-unawa, at sa pagiging ikaw. 
+
+</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right">
+          <!-- Music Panel -->
+          <div class="card music">
+            <div style="font-weight:700;">Mundo - Our Song</div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/omFa4Yk9Fmg?si=wu9LVV0etW_lxy2R&amp;start=5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Message -->
+      <div class="from-fria">
+        <p>Before this website ends, please read this. I know that u arent fond of sweet words hehe sureh. I made this little corner of the web for you. Hope it made you smile 💖</p>
+        <a href="lovegamfor_abi.html"><img src="Assets/7.jpeg" alt="Cute image" /></a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ✅ TAB & SUBTAB FUNCTIONALITY
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const subTabWraps = document.querySelectorAll('.subtab-wrap');
+    const letterContents = document.querySelectorAll('.letter-inner');
+    const subTabButtons = document.querySelectorAll('.subtab-btn');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const tab = btn.dataset.tab;
+
+        // Hide all subtab wraps
+        subTabWraps.forEach(w => w.style.display = 'none');
+
+        // Show selected subtab wrap
+        const subWrap = document.getElementById(`sub-${tab}`);
+        if (subWrap) subWrap.style.display = 'flex';
+
+        // Hide all letters
+        letterContents.forEach(l => l.classList.remove('open'));
+      });
+    });
+
+    subTabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.letter;
+
+        // Hide all letters
+        letterContents.forEach(l => l.classList.remove('open'));
+
+        // Show selected letter
+        const content = document.getElementById(id);
+        if (content) content.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>
